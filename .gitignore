@@ -1,0 +1,27 @@
+# Fichiers de build
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Fichiers binaires
+*.o
+*.so
+*.a
+*.out
+*.exe
+
+# Qt Creator
+*.user
+*.pro.user
+*.qbs.user
+*.autosave
+
+# Logs et temporaires
+*.log
+*.tmp
+*.swp
+
+# Sauvegardes éditeurs
+*~
