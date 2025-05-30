@@ -2,6 +2,8 @@
 #define TRANSACTIONMANAGER_H
 
 #include <QList>
+#include <QFile>
+#include <QTextStream>
 #include "transaction.h"
 
 /**
@@ -87,6 +89,13 @@ public:
      * @return true si la suppression a réussi, false sinon.
      */
     bool removeTransaction(int index);
+
+    /**
+     * @brief Exporte la liste des transactions au format CSV dans le fichier donné.
+     * @param filePath Le chemin du fichier CSV à générer.
+     * @return true si l'export a réussi, false sinon.
+     */
+    bool exportToCSV(const QString& filePath) const;
 
 private:
     QList<CTransaction> m_transactions;

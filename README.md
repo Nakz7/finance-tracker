@@ -2,23 +2,24 @@
 
 > Une application de gestion des finances personnelles écrite en **C++ avec Qt**, basée sur le **TDD** et les **design patterns modernes** (style KDAB).
 
-
 ## 🚀 Objectifs du projet
 
-- Suivre les **transactions** (revenus, dépenses)
-- Gérer les **budgets mensuels par catégorie**
-- Afficher des **graphiques clairs** (Qt Charts)
-- Avoir une interface graphique fluide et minimaliste
-- Appliquer le **Test Driven Development (TDD)** avec **Google Test**
-- Concevoir une architecture **modulaire, testable, maintenable**
+* Suivre les **transactions** (revenus, dépenses)
+* Gérer les **budgets mensuels par catégorie**
+* Afficher des **graphiques clairs** (Qt Charts)
+* Avoir une interface graphique fluide et minimaliste
+* Appliquer le **Test Driven Development (TDD)** avec **Google Test**
+* Concevoir une architecture **modulaire, testable, maintenable**
+* Générer la **documentation technique** automatiquement avec **Doxygen**
 
 ## 🛠️ Technologies
 
-- C++17 / Qt 5.15+
-- CMake
-- Qt Widgets / Qt Charts
-- Google Test
-- Git, GitHub, Linux
+* C++17 / Qt 5.15+
+* CMake
+* Qt Widgets / Qt Charts
+* Google Test (tests unitaires automatisés)
+* Doxygen (documentation du code)
+* Git, GitHub, Linux
 
 ## 📦 Build & Lancement
 
@@ -37,8 +38,10 @@ make
 
 # Lancement
 ./finance_tracker
-````
 
+# Générer la documentation Doxygen
+doxygen Doxyfile
+```
 
 ## 📚 Structure du projet
 
@@ -48,25 +51,46 @@ make
 ├── include/          # Headers du projet
 ├── tests/            # Tests unitaires GoogleTest
 ├── build/            # Répertoire de compilation (à ignorer)
+├── docs/ or html/    # Documentation générée par Doxygen (à ignorer)
 ├── CMakeLists.txt    # Fichier de configuration CMake
+├── Doxyfile          # Fichier de configuration Doxygen
 └── README.md
 ```
 
+## ✨ Avancement & fonctionnalités réalisées
+
+* [x] Création de la classe `CTransaction`
+* [x] Ajout du champ **catégorie** sur chaque transaction
+* [x] Création et tests de la classe `CTransactionManager` :
+
+  * Ajout, suppression, comptage, solde
+  * Filtres avancés (mois/année, catégorie, plage de montants, type)
+  * Suppression d’une transaction par index
+* [x] Export CSV des transactions
+* [x] Écriture systématique des **tests unitaires** (TDD)
+* [x] **Documentation Doxygen** configurée et active
 
 ## ✨ Prochaines fonctionnalités (roadmap)
 
-* [ ] Ajout d’un `TransactionManager`
-* [ ] Export CSV / PDF des transactions
-* [ ] Vue graphique avec filtres temporels
+* [ ] Export PDF des transactions (optionnel)
+* [ ] Vue graphique avec filtres temporels (Qt Charts)
 * [ ] Notification en cas de dépassement de budget
-
 
 ## 🧪 Tests automatisés
 
-Lancer tous les tests avant de lancer l'application :
+Lancer tous les tests avant de lancer l'application :
 
 ```bash
 ./run_with_tests.sh
+```
+
+## 📖 Documentation technique
+
+Générer la documentation :
+
+```bash
+doxygen Doxyfile
+# Ouvrir docs/index.html ou html/index.html dans un navigateur
 ```
 
 ## 🔐 Auteur

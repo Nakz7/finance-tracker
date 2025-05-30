@@ -1,4 +1,6 @@
 #include <gtest/gtest.h>
+#include <QFile>
+#include <QTextStream>
 #include "transactionmanager.h"
 
 /**
@@ -184,4 +186,29 @@ TEST(TransactionManagerTest, TransactionsByAmountRange)
     // Transactions entre 2000 et 3000
     QList<CTransaction> txsHigh = manager.transactionsByAmountRange(2000.0, 3000.0);
     ASSERT_TRUE(txsHigh.isEmpty());
+}
+
+/**
+ * @brief Teste l’export des transactions au format CSV.
+ */
+TEST(TransactionManagerTest, ExportToCSV)
+{
+    CTransactionManager manager;
+    manager.addTransaction(CTransaction(CTransaction::Type::Income, 1200.0, "Salaire", QDate(2024, 6, 1), "Travail"));
+    manager.addTransaction(CTransaction(CTransaction::Type::Expense, 150.0, "Courses", QDate(2024, 6, 3), "Alimentation"));
+
+    QString tmpFile = "test_transactions.csv";
+    ASSERT_TRUE(manager.exportToCSV(tmpFile));
+
+    QFile file(tmpFile);
+    ASSERT_TRUE(file.open(QIODevice::ReadOnly | QIODevice::Text));
+    QTextStream in(&file);
+    QString content = in.readAll();
+    file.close();
+    file.remove();  // Nettoyage du fichier temporaire
+
+    // Vérifie que le header et les transactions sont présents
+    EXPECT_TRUE(content.contains("Type,Amount,Label,Date,Category"));
+    EXPECT_TRUE(content.contains("Income,1200.0,Salaire,2024-06-01,Travail"));
+    EXPECT_TRUE(content.contains("Expense,150.0,Courses,2024-06-03,Alimentation"));
 }

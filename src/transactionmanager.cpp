@@ -141,3 +141,29 @@ bool CTransactionManager::removeTransaction(int index)
     m_transactions.removeAt(index);
     return true;
 }
+
+/**
+ * @brief Exporte la liste des transactions au format CSV dans le fichier donné.
+ * @param filePath Le chemin du fichier CSV à générer.
+ * @return true si l'export a réussi, false sinon.
+ */
+bool CTransactionManager::exportToCSV(const QString& filePath) const
+{
+    QFile file(filePath);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        return false;
+
+    QTextStream out(&file);
+    // Header CSV
+    out << "Type,Amount,Label,Date,Category\n";
+    for (const auto& tx : m_transactions) {
+        QString typeStr = (tx.type() == CTransaction::Type::Income) ? "Income" : "Expense";
+        out << typeStr << ','
+            << QString::number(tx.amount()) << ','
+            << tx.label() << ','
+            << tx.date().toString("yyyy-MM-dd") << ','
+            << tx.category() << '\n';
+    }
+    file.close();
+    return true;
+}
