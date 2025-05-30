@@ -96,3 +96,13 @@ doxygen Doxyfile
 ## 🔐 Auteur
 
 Développé par **Neil** — Projet personnel pour améliorer mes compétences en développement logiciel robuste avec Qt.
+
+## Licence et contributions
+
+Le code source de ce projet est mis à disposition pour consultation publique.
+
+- **Modification et utilisation interdites sans mon accord.**
+- Vous pouvez proposer des améliorations via des pull requests ou signaler des problèmes via les issues.
+- Toute utilisation ou redistribution sans autorisation est interdite.
+
+Pour toute demande, contactez-moi à [neil.lf007@hotmail.com].
