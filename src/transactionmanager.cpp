@@ -9,6 +9,17 @@ void CTransactionManager::addTransaction(const CTransaction &transaction)
     m_transactions.append(transaction);
 }
 
+QList<CTransaction> CTransactionManager::transactionsByDateRange(const QDate& fromDate, const QDate& toDate) const
+{
+    QList<CTransaction> filtered;
+    for (const auto& t : m_transactions) {
+        if (t.date() >= fromDate && t.date() <= toDate) {
+            filtered.append(t);
+        }
+    }
+    return filtered;
+}
+
 /**
  * @brief Supprime toutes les transactions.
  */
