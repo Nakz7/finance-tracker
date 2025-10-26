@@ -14,15 +14,15 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
-      m_transactionManager(new CTransactionManager),
+      m_transactionManager(new Transactions::CTransactionManager),
       m_budgetManager(new Budget::CBudgetManager)
 {
     // --- Sample Data ---
-    m_transactionManager->addTransaction(CTransaction(CTransaction::Type::Expense, 50.0, "Groceries", QDate::currentDate().addDays(-5), "Food"));
-    m_transactionManager->addTransaction(CTransaction(CTransaction::Type::Expense, 25.0, "Gas", QDate::currentDate().addDays(-10), "Transport"));
-    m_transactionManager->addTransaction(CTransaction(CTransaction::Type::Expense, 120.0, "Tickets", QDate::currentDate().addMonths(-1), "Entertainment"));
-    m_transactionManager->addTransaction(CTransaction(CTransaction::Type::Income, 2000.0, "Salary", QDate::currentDate().addMonths(-2), "Work"));
-    m_transactionManager->addTransaction(CTransaction(CTransaction::Type::Expense, 75.0, "Dinner", QDate::currentDate().addMonths(-3), "Food"));
+    m_transactionManager->addTransaction(Transactions::CTransaction(Transactions::CTransaction::Type::Expense, 50.0, "Groceries", QDate::currentDate().addDays(-5), "Food"));
+    m_transactionManager->addTransaction(Transactions::CTransaction(Transactions::CTransaction::Type::Expense, 25.0, "Gas", QDate::currentDate().addDays(-10), "Transport"));
+    m_transactionManager->addTransaction(Transactions::CTransaction(Transactions::CTransaction::Type::Expense, 120.0, "Tickets", QDate::currentDate().addMonths(-1), "Entertainment"));
+    m_transactionManager->addTransaction(Transactions::CTransaction(Transactions::CTransaction::Type::Income, 2000.0, "Salary", QDate::currentDate().addMonths(-2), "Work"));
+    m_transactionManager->addTransaction(Transactions::CTransaction(Transactions::CTransaction::Type::Expense, 75.0, "Dinner", QDate::currentDate().addMonths(-3), "Food"));
 
     m_budgetManager->addBudget(Budget::CBudget(QDate::currentDate().year(), QDate::currentDate().month(), "Food", 150.0));
 
