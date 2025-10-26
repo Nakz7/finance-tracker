@@ -3,6 +3,7 @@
 #include <QSpinBox>
 #include <QComboBox>
 #include <QDate>
+#include <QLocale>
 #include <QtCharts/QChart>
 #include <QtCharts/QBarSeries>
 #include "mainwindow.h"
@@ -55,24 +56,40 @@ TEST_F(MainWindowTest, UpdateChartLogic_CustomDate) {
     QtCharts::QChart* chart = w.chart();
     ASSERT_NE(chart, nullptr);
 
+    // --- Test Setup: Create a known state ---
+    CTransactionManager* tm = w.transactionManager();
+    ASSERT_NE(tm, nullptr);
+    tm->clear(); // Clear default sample data
+    // Add specific data for this test
+    tm->addTransaction(CTransaction(CTransaction::Type::Expense, 100.0, "Test Expense 1", QDate(2024, 7, 10), "CategoryA"));
+    tm->addTransaction(CTransaction(CTransaction::Type::Expense, 50.0, "Test Expense 2", QDate(2024, 7, 15), "CategoryB"));
+    tm->addTransaction(CTransaction(CTransaction::Type::Income, 200.0, "Test Income", QDate(2024, 7, 12), "CategoryA"));
+
     // Set the range to Custom to enable month/year widgets
     w.dateRangeComboBox()->setCurrentIndex(w.dateRangeComboBox()->findData(static_cast<int>(UI::DateRange::Custom)));
 
     // Set filters to July 2024
-    w.yearSpinBox()->setValue(2024);
-    w.monthComboBox()->setCurrentIndex(6); // July (0-indexed)
+    const int year = 2024;
+    const int month = 7;
+    w.yearSpinBox()->setValue(year);
+    w.monthComboBox()->setCurrentIndex(month - 1);
 
     // Manually trigger the update
     w.updateChart();
 
-    // Check chart title
-    std::string expectedTitle = "Expenses for July 2024";
-    ASSERT_EQ(chart->title().toStdString(), expectedTitle);
+    // --- Assertions ---
+    // Check chart title in a locale-independent way
+    QString expectedTitle = QString("Expenses for %1 %2")
+                              .arg(QLocale::system().monthName(month))
+                              .arg(year);
+    ASSERT_EQ(chart->title().toStdString(), expectedTitle.toStdString());
 
-    // Check number of series and bar sets based on original sample data
-    // This part is now fragile because sample data has changed.
-    // Let's just check that a series is present.
+    // Check series and bar sets based on the controlled data
+    // We have 2 expenses in 2 unique categories, so we expect 2 bar sets.
     ASSERT_EQ(chart->series().count(), 1);
+    QtCharts::QBarSeries* series = static_cast<QtCharts::QBarSeries*>(chart->series().at(0));
+    ASSERT_NE(series, nullptr);
+    EXPECT_EQ(series->barSets().count(), 2);
 }
 
 
