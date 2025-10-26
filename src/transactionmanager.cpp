@@ -172,7 +172,7 @@ bool CTransactionManager::exportToCSV(const QString& filePath) const
     for (const auto& tx : m_transactions) {
         QString typeStr = (tx.type() == CTransaction::Type::Income) ? "Income" : "Expense";
         out << typeStr << ','
-            << QString::number(tx.amount()) << ','
+            << QString::number(tx.amount(), 'f', 1) << ','
             << tx.label() << ','
             << tx.date().toString("yyyy-MM-dd") << ','
             << tx.category() << '\n';
