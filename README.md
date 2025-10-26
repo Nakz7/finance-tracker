@@ -59,22 +59,35 @@ doxygen Doxyfile
 
 ## ✨ Avancement & fonctionnalités réalisées
 
-* [x] Création de la classe `CTransaction`
-* [x] Ajout du champ **catégorie** sur chaque transaction
-* [x] Création et tests de la classe `CTransactionManager` :
-
-  * Ajout, suppression, comptage, solde
-  * Filtres avancés (mois/année, catégorie, plage de montants, type)
-  * Suppression d’une transaction par index
-* [x] Export CSV des transactions
-* [x] Écriture systématique des **tests unitaires** (TDD)
-* [x] **Documentation Doxygen** configurée et active
+* [x] **Architecture Backend** :
+    * [x] Création de la classe `CTransaction`.
+    * [x] Création et tests de la classe `CTransactionManager` (ajout, suppression, filtres avancés, etc.).
+    * [x] Logique de gestion de **budgets** (`CBudget`, `CBudgetManager`).
+    * [x] Export CSV des transactions.
+* [x] **Interface Graphique (UI)** :
+    * [x] Vue principale avec **graphique** (Qt Charts) affichant les dépenses par catégorie.
+    * [x] **Filtres temporels** avancés (mois en cours, 3 derniers mois, année, personnalisé).
+    * [x] Boîte de dialogue pour l'**ajout de nouvelles transactions**.
+    * [x] **Notification** en cas de dépassement de budget lors de l'ajout d'une dépense.
+* [x] **Qualité & Tests** :
+    * [x] Écriture systématique des **tests unitaires** (TDD) pour toute la logique métier.
+    * [x] Tests unitaires pour la logique de l'**interface graphique** (en mode headless).
+    * [x] **Documentation Doxygen** complète pour toutes les classes.
+    * [x] Refactorisation du **build system CMake** vers une architecture modulaire avec une librairie `core`.
 
 ## ✨ Prochaines fonctionnalités (roadmap)
 
-* [ ] Export PDF des transactions (optionnel)
-* [ ] Vue graphique avec filtres temporels (Qt Charts)
-* [ ] Notification en cas de dépassement de budget
+* [ ] **Gestion des Budgets via l'UI** :
+    * [ ] Interface pour créer, modifier et supprimer des budgets.
+* [ ] **Gestion des Transactions via l'UI** :
+    * [ ] Affichage des transactions dans un tableau (`QTableView`).
+    * [ ] Possibilité de modifier ou supprimer une transaction existante.
+* [ ] **Persistance des Données** :
+    * [ ] Sauvegarde et chargement des transactions et des budgets depuis un fichier (CSV, JSON ou SQLite).
+* [ ] **Améliorations Visuelles** :
+    * [ ] Ajout de nouveaux types de graphiques (ex: camembert pour les catégories).
+    * [ ] Amélioration du design général.
+* [ ] **Export PDF** des transactions (optionnel).
 
 ## 🧪 Tests automatisés
 
