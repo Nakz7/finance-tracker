@@ -18,10 +18,10 @@ const CBudget* CBudgetManager::findBudget(int year, int month, const QString& ca
     return nullptr;
 }
 
-bool CBudgetManager::isBudgetExceeded(const QList<CTransaction>& transactions, const CTransaction& newExpense) const
+bool CBudgetManager::isBudgetExceeded(const QList<Transactions::CTransaction>& transactions, const Transactions::CTransaction& newExpense) const
 {
     // Ensure the new transaction is actually an expense
-    if (newExpense.type() != CTransaction::Type::Expense) {
+    if (newExpense.type() != Transactions::CTransaction::Type::Expense) {
         return false;
     }
 
@@ -39,7 +39,7 @@ bool CBudgetManager::isBudgetExceeded(const QList<CTransaction>& transactions, c
     // Calculate total expenses for the period and category
     double totalExpenses = 0.0;
     for (const auto& t : transactions) {
-        if (t.date().year() == year && t.date().month() == month && t.category() == category && t.type() == CTransaction::Type::Expense) {
+        if (t.date().year() == year && t.date().month() == month && t.category() == category && t.type() == Transactions::CTransaction::Type::Expense) {
             totalExpenses += t.amount();
         }
     }

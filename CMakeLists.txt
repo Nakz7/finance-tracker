@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-# Nom du projet
+# === Projet général ===
 project(FinanceTracker VERSION 0.1 LANGUAGES CXX)
 
 # Standard C++17 et options Qt

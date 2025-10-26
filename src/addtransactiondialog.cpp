@@ -19,8 +19,8 @@ void CAddTransactionDialog::setupUi()
 
     // --- Form Widgets ---
     m_typeComboBox = new QComboBox();
-    m_typeComboBox->addItem("Expense", static_cast<int>(CTransaction::Type::Expense));
-    m_typeComboBox->addItem("Income", static_cast<int>(CTransaction::Type::Income));
+    m_typeComboBox->addItem("Expense", static_cast<int>(Transactions::CTransaction::Type::Expense));
+    m_typeComboBox->addItem("Income", static_cast<int>(Transactions::CTransaction::Type::Income));
 
     m_amountSpinBox = new QDoubleSpinBox();
     m_amountSpinBox->setRange(0.01, 1000000.0);
@@ -48,15 +48,15 @@ void CAddTransactionDialog::setupUi()
     setLayout(formLayout);
 }
 
-CTransaction CAddTransactionDialog::getTransaction() const
+Transactions::CTransaction CAddTransactionDialog::getTransaction() const
 {
-    const CTransaction::Type type = static_cast<CTransaction::Type>(m_typeComboBox->currentData().toInt());
+    const Transactions::CTransaction::Type type = static_cast<Transactions::CTransaction::Type>(m_typeComboBox->currentData().toInt());
     const double amount = m_amountSpinBox->value();
     const QString label = m_labelLineEdit->text();
     const QDate date = m_dateEdit->date();
     const QString category = m_categoryLineEdit->text();
 
-    return CTransaction(type, amount, label, date, category);
+    return Transactions::CTransaction(type, amount, label, date, category);
 }
 
 } // namespace UI

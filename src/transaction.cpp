@@ -1,5 +1,7 @@
 #include "transaction.h"
 
+namespace Transactions {
+
 /**
  * @brief Constructeur d'une transaction.
  */
@@ -35,4 +37,6 @@ QDate CTransaction::date() const
 QString CTransaction::category() const
 {
     return m_category;
+}
+
 }
