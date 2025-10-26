@@ -189,6 +189,23 @@ TEST(TransactionManagerTest, TransactionsByAmountRange)
 }
 
 /**
+ * @brief Teste le filtrage des transactions par plage de dates.
+ */
+TEST(TransactionManagerTest, TransactionsByDateRange)
+{
+    CTransactionManager manager;
+    manager.addTransaction(CTransaction(CTransaction::Type::Income, 1000.0, "Salaire", QDate(2024, 6, 1)));
+    manager.addTransaction(CTransaction(CTransaction::Type::Expense, 120.0, "Courses", QDate(2024, 6, 15)));
+    manager.addTransaction(CTransaction(CTransaction::Type::Expense, 80.0, "Essence", QDate(2024, 5, 27)));
+    manager.addTransaction(CTransaction(CTransaction::Type::Income, 200.0, "Cadeau", QDate(2024, 6, 30)));
+
+    QDate from(2024, 6, 1);
+    QDate to(2024, 6, 30);
+    QList<CTransaction> juneTxs = manager.transactionsByDateRange(from, to);
+    ASSERT_EQ(juneTxs.size(), 3);
+}
+
+/**
  * @brief Teste l’export des transactions au format CSV.
  */
 TEST(TransactionManagerTest, ExportToCSV)
