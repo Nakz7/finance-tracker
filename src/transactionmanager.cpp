@@ -1,5 +1,7 @@
 #include "transactionmanager.h"
 
+namespace Transactions {
+
 /**
  * @brief Ajoute une transaction à la liste.
  * @param transaction La transaction à ajouter
@@ -177,4 +179,6 @@ bool CTransactionManager::exportToCSV(const QString& filePath) const
     }
     file.close();
     return true;
+}
+
 }
