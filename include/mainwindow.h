@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "budgetmanager.h" // Include the full definition for MOC
+#include "transactionmanager.h" // Include the full definition for MOC
 
 // Forward declarations
 class QComboBox;
@@ -23,8 +24,6 @@ namespace QtCharts
     class QChartView;
     class QChart;
 }
-
-class CTransactionManager;
 
 /**
  * @brief La classe MainWindow est la fenêtre principale de l'application.
