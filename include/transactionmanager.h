@@ -6,6 +6,8 @@
 #include <QTextStream>
 #include "transaction.h"
 
+namespace Transactions {
+
 /**
  * @brief La classe CTransactionManager gère une liste de transactions financières.
  *
@@ -101,4 +103,5 @@ private:
     QList<CTransaction> m_transactions;
 };
 
+}
 #endif // TRANSACTIONMANAGER_H

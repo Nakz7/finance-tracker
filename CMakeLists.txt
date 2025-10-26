@@ -1,51 +1,49 @@
 cmake_minimum_required(VERSION 3.16)
 
-# Nom du projet
+# === Projet général ===
 project(FinanceTracker VERSION 0.1 LANGUAGES CXX)
+
+# Active l'AUTOMOC indispensable pour Qt (génération signaux/slots)
+set(CMAKE_AUTOMOC ON)
 
 # Utilise le standard C++17
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-# Active le mode debug par défaut (utile pour TDD et développement)
 set(CMAKE_BUILD_TYPE Debug)
 
-# Recherche Qt5 (remplace Qt5 par Qt6 si tu préfères)
+# Recherche Qt5 (remplace Qt5 par Qt6 si besoin)
 find_package(Qt5 REQUIRED COMPONENTS Widgets Charts)
 
-# Ajout des fichiers source
+# === Fichiers du projet ===
 file(GLOB_RECURSE SOURCES CONFIGURE_DEPENDS src/*.cpp)
 file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS include/*.h)
 
-# Cible principale de l'application
-add_executable(finance_tracker ${SOURCES} ${HEADERS})
+# === Librairie principale contenant toute la logique de l'application ===
+add_library(finance_tracker_core ${SOURCES} ${HEADERS})
+target_link_libraries(finance_tracker_core Qt5::Widgets Qt5::Charts)
+target_include_directories(finance_tracker_core PUBLIC include)
 
-# Lien avec Qt5 (Widgets et Charts)
-target_link_libraries(finance_tracker Qt5::Widgets Qt5::Charts)
+# === Exécutable principal (juste le main.cpp) ===
+add_executable(finance_tracker src/main.cpp)
+target_link_libraries(finance_tracker finance_tracker_core)
 
-# Ajoute le dossier include au chemin d'inclusion
-target_include_directories(finance_tracker PRIVATE include)
-
-# Partie TESTS
+# === Partie TESTS ===
 enable_testing()
-
-# Crée une cible séparée pour les tests
 file(GLOB_RECURSE TEST_SOURCES CONFIGURE_DEPENDS tests/*.cpp)
 
-# Ajouter aussi le code source de l'application utilisé dans les tests
-set(TEST_DEPENDENCIES
-    ${TEST_SOURCES}
-    ${SOURCES}
-)
-
-add_executable(finance_tracker_tests ${TEST_DEPENDENCIES})
-
+# Exécutable des tests unitaires
+add_executable(finance_tracker_tests ${TEST_SOURCES})
 target_link_libraries(finance_tracker_tests
+    finance_tracker_core           # Logique commune à l'app et aux tests
     Qt5::Widgets
     Qt5::Charts
     gtest
     gtest_main
     pthread
 )
-
 target_include_directories(finance_tracker_tests PRIVATE include)
+
+# === Conseils ===
+# Nouveau .cpp/.h, il sera détecté grâce à GLOB_RECURSE
+# - Tests couvrent tout le code métier, ajout dans finance_tracker_core uniquement
+# - Headers ne sont ajoutés que pour l'automoc, ils ne sont pas recompilés

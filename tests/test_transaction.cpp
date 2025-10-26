@@ -6,9 +6,9 @@
  */
 TEST(TransactionTest, CanCreateIncomeTransaction)
 {
-    CTransaction t(CTransaction::Type::Income, 1500.0, "Salaire");
+    Transactions::CTransaction t(Transactions::CTransaction::Type::Income, 1500.0, "Salaire");
 
-    EXPECT_EQ(t.type(), CTransaction::Type::Income);
+    EXPECT_EQ(t.type(), Transactions::CTransaction::Type::Income);
     EXPECT_DOUBLE_EQ(t.amount(), 1500.0);
     EXPECT_EQ(t.label(), "Salaire");
     EXPECT_TRUE(t.date().isValid());
@@ -19,9 +19,9 @@ TEST(TransactionTest, CanCreateIncomeTransaction)
  */
 TEST(TransactionTest, CanCreateExpenseTransaction)
 {
-    CTransaction t(CTransaction::Type::Expense, 60.5, "Courses", QDate(2024, 12, 15));
+    Transactions::CTransaction t(Transactions::CTransaction::Type::Expense, 60.5, "Courses", QDate(2024, 12, 15));
 
-    EXPECT_EQ(t.type(), CTransaction::Type::Expense);
+    EXPECT_EQ(t.type(), Transactions::CTransaction::Type::Expense);
     EXPECT_DOUBLE_EQ(t.amount(), 60.5);
     EXPECT_EQ(t.label(), "Courses");
     EXPECT_EQ(t.date(), QDate(2024, 12, 15));
@@ -32,8 +32,8 @@ TEST(TransactionTest, CanCreateExpenseTransaction)
  */
 TEST(TransactionTest, CanCreateTransactionWithCategory)
 {
-    CTransaction t(CTransaction::Type::Expense, 120.0, "Courses", QDate(2024, 6, 3), "Alimentation");
-    EXPECT_EQ(t.type(), CTransaction::Type::Expense);
+    Transactions::CTransaction t(Transactions::CTransaction::Type::Expense, 120.0, "Courses", QDate(2024, 6, 3), "Alimentation");
+    EXPECT_EQ(t.type(), Transactions::CTransaction::Type::Expense);
     EXPECT_DOUBLE_EQ(t.amount(), 120.0);
     EXPECT_EQ(t.label(), "Courses");
     EXPECT_EQ(t.date(), QDate(2024, 6, 3));
@@ -45,6 +45,6 @@ TEST(TransactionTest, CanCreateTransactionWithCategory)
  */
 TEST(TransactionTest, CanCreateTransactionWithDefaultCategory)
 {
-    CTransaction t(CTransaction::Type::Income, 1000.0, "Salaire");
+    Transactions::CTransaction t(Transactions::CTransaction::Type::Income, 1000.0, "Salaire");
     EXPECT_EQ(t.category(), "");
 }
