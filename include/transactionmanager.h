@@ -84,6 +84,14 @@ public:
     QList<CTransaction> transactionsByAmountRange(double minAmount, double maxAmount) const;
 
     /**
+     * @brief Retourne la liste des transactions pour une plage de dates donnée.
+     * @param fromDate La date de début (incluse).
+     * @param toDate La date de fin (incluse).
+     * @return Liste filtrée des transactions.
+     */
+    QList<CTransaction> transactionsByDateRange(const QDate& fromDate, const QDate& toDate) const;
+
+    /**
      * @brief Supprime la transaction à l'index donné.
      * @param index Index de la transaction à supprimer
      * @return true si la suppression a réussi, false sinon.
