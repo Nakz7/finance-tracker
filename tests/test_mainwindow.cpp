@@ -89,10 +89,10 @@ TEST_F(MainWindowTest, BudgetExceededLogicIsTriggered) {
     // Get the internal transaction manager to add transactions
     CTransactionManager* tm = w.transactionManager();
     ASSERT_NE(tm, nullptr);
-    tm->addTransaction(CTransaction(CTransaction::Type::Expense, 80.0, "Initial shopping", QDate::currentDate(), "Groceries"));
+    tm->addTransaction(Transactions::CTransaction(Transactions::CTransaction::Type::Expense, 80.0, "Initial shopping", QDate::currentDate(), "Groceries"));
 
     // This new expense should exceed the budget
-    CTransaction newExpense(CTransaction::Type::Expense, 30.0, "More shopping", QDate::currentDate(), "Groceries");
+    Transactions::CTransaction newExpense(Transactions::CTransaction::Type::Expense, 30.0, "More shopping", QDate::currentDate(), "Groceries");
     tm->addTransaction(newExpense);
 
     // Verify that the budget manager detects the exceeded budget
