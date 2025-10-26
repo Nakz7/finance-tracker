@@ -57,13 +57,13 @@ TEST_F(MainWindowTest, UpdateChartLogic_CustomDate) {
     ASSERT_NE(chart, nullptr);
 
     // --- Test Setup: Create a known state ---
-    CTransactionManager* tm = w.transactionManager();
+    Transactions::CTransactionManager* tm = w.transactionManager();
     ASSERT_NE(tm, nullptr);
     tm->clear(); // Clear default sample data
     // Add specific data for this test
-    tm->addTransaction(CTransaction(CTransaction::Type::Expense, 100.0, "Test Expense 1", QDate(2024, 7, 10), "CategoryA"));
-    tm->addTransaction(CTransaction(CTransaction::Type::Expense, 50.0, "Test Expense 2", QDate(2024, 7, 15), "CategoryB"));
-    tm->addTransaction(CTransaction(CTransaction::Type::Income, 200.0, "Test Income", QDate(2024, 7, 12), "CategoryA"));
+    tm->addTransaction(Transactions::CTransaction(Transactions::CTransaction::Type::Expense, 100.0, "Test Expense 1", QDate(2024, 7, 10), "CategoryA"));
+    tm->addTransaction(Transactions::CTransaction(Transactions::CTransaction::Type::Expense, 50.0, "Test Expense 2", QDate(2024, 7, 15), "CategoryB"));
+    tm->addTransaction(Transactions::CTransaction(Transactions::CTransaction::Type::Income, 200.0, "Test Income", QDate(2024, 7, 12), "CategoryA"));
 
     // Set the range to Custom to enable month/year widgets
     w.dateRangeComboBox()->setCurrentIndex(w.dateRangeComboBox()->findData(static_cast<int>(UI::DateRange::Custom)));
