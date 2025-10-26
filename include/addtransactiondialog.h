@@ -33,7 +33,7 @@ public:
      * @brief Retourne la transaction créée à partir des données du formulaire.
      * @return Un objet CTransaction.
      */
-    CTransaction getTransaction() const;
+    Transactions::CTransaction getTransaction() const;
 
 private:
     void setupUi();

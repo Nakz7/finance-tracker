@@ -33,7 +33,7 @@ public:
      * @param newExpense La nouvelle dépense qui vient d'être ajoutée.
      * @return true si le budget est dépassé, false sinon.
      */
-    bool isBudgetExceeded(const QList<CTransaction>& transactions, const CTransaction& newExpense) const;
+    bool isBudgetExceeded(const QList<Transactions::CTransaction>& transactions, const Transactions::CTransaction& newExpense) const;
 
     /**
      * @brief Récupère le budget pour une catégorie et une date spécifiques.

@@ -4,6 +4,8 @@
 #include <QString>
 #include <QDate>
 
+namespace Transactions {
+
 /**
  * @brief La classe CTransaction représente une opération financière (revenu ou dépense).
  */
@@ -61,6 +63,6 @@ private:
     QString m_category; ///< Catégorie de la transaction
 };
 
-
+}
 
 #endif // TRANSACTION_H
