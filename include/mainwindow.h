@@ -66,7 +66,7 @@ public:
     /**
      * @brief Retourne un pointeur vers le gestionnaire de transactions (pour les tests).
      */
-    CTransactionManager* transactionManager() const { return m_transactionManager; }
+    Transactions::CTransactionManager* transactionManager() const { return m_transactionManager; }
 
     /**
      * @brief Retourne un pointeur vers le gestionnaire de budgets (pour les tests).
@@ -107,7 +107,7 @@ private:
     QPushButton* m_addTransactionButton = nullptr; ///< Le bouton pour ajouter une transaction.
 
     // Membre Données
-    CTransactionManager* m_transactionManager = nullptr; ///< Le gestionnaire de transactions.
+    Transactions::CTransactionManager* m_transactionManager = nullptr; ///< Le gestionnaire de transactions.
     Budget::CBudgetManager* m_budgetManager = nullptr; ///< Le gestionnaire de budgets.
 };
 

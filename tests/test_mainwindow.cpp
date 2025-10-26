@@ -87,7 +87,7 @@ TEST_F(MainWindowTest, BudgetExceededLogicIsTriggered) {
     bm->addBudget(Budget::CBudget(QDate::currentDate().year(), QDate::currentDate().month(), "Groceries", 100.0));
 
     // Get the internal transaction manager to add transactions
-    CTransactionManager* tm = w.transactionManager();
+    Transactions::CTransactionManager* tm = w.transactionManager();
     ASSERT_NE(tm, nullptr);
     tm->addTransaction(Transactions::CTransaction(Transactions::CTransaction::Type::Expense, 80.0, "Initial shopping", QDate::currentDate(), "Groceries"));
 

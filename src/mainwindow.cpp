@@ -138,7 +138,7 @@ void MainWindow::updateChart()
     auto transactions = m_transactionManager->transactionsByDateRange(fromDate, toDate);
 
     for (const auto& t : transactions) {
-        if (t.type() == CTransaction::Type::Expense) {
+        if (t.type() == Transactions::CTransaction::Type::Expense) {
             expensesByCategory[t.category()] += t.amount();
         }
     }
@@ -173,7 +173,7 @@ void MainWindow::onAddTransactionClicked()
 {
     UI::CAddTransactionDialog dialog(this);
     if (dialog.exec() == QDialog::Accepted) {
-        CTransaction newTransaction = dialog.getTransaction();
+        Transactions::CTransaction newTransaction = dialog.getTransaction();
         m_transactionManager->addTransaction(newTransaction);
         updateChart();
 
